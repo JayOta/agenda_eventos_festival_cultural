@@ -1,0 +1,269 @@
+/* Importação de fonte */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+:root {
+  --cor-fundo: #f0f4f8;
+  --cor-primaria: #6c5ce7; /* Roxo */
+  --cor-secundaria: #00cec9; /* Ciano */
+  --cor-texto-principal: #2d3436;
+  --cor-card-fundo: #ffffff;
+  --cor-sombra: rgba(108, 92, 231, 0.15);
+
+  /* Cores do Gráfico */
+  --cor-show: #ff7675; /* Vermelho/Show */
+  --cor-workshop: #00cec9; /* Ciano/Workshop */
+  --cor-exposicao: #fdcb6e; /* Amarelo/Exposição */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto-principal);
+  line-height: 1.6;
+}
+
+/* --- CABEÇALHO --- */
+.main-header {
+  background-color: var(--cor-primaria);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px var(--cor-sombra);
+}
+
+.main-header h1 {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+}
+
+/* --- CONTROLES (Filtro, Gráfico e Formulário) --- */
+.events-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.control-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+
+.filter-box,
+.add-event-form,
+.pie-chart-container {
+  background-color: var(--cor-card-fundo);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.filter-select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* --- FORMULÁRIO --- */
+.add-event-form h3 {
+  color: var(--cor-primaria);
+  margin-bottom: 15px;
+}
+
+.add-event-form input,
+.add-event-form select,
+.add-event-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.add-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #5d4ae9;
+}
+
+/* --- GRÁFICO DE PIZZA (CSS PURE) --- */
+.pie-chart-container h3 {
+  margin-bottom: 20px;
+  color: var(--cor-secundaria);
+}
+
+.pie-chart {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  background: conic-gradient(
+    transparent 0deg 0deg /* Valores iniciais que serão preenchidos pelo JS */
+  );
+  box-shadow: 0 0 0 5px #f0f4f8; /* Borda externa */
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+/* --- LISTA DE EVENTOS --- */
+.events-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* --- CARD DE EVENTO --- */
+.event-card {
+  position: relative;
+  background-color: var(--cor-card-fundo);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.event-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px var(--cor-sombra);
+}
+
+.card-header {
+  padding: 15px;
+  color: white;
+}
+
+/* Cores dinâmicas para o cabeçalho do card */
+.show .card-header {
+  background-color: var(--cor-show);
+}
+.workshop .card-header {
+  background-color: var(--cor-workshop);
+}
+.exposicao .card-header {
+  background-color: var(--cor-exposicao);
+}
+
+/* Botão de Remover */
+.remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #cc0000;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  font-size: 1.5em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s, background 0.3s;
+  z-index: 10;
+}
+
+.event-card:hover .remove-button {
+  opacity: 1;
+}
+
+.remove-button:hover {
+  background-color: #cc0000;
+  color: white;
+}
+
+/* Resto da estilização */
+.card-body {
+  padding: 15px;
+}
+.card-body p {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+.card-body strong {
+  color: var(--cor-primaria);
+}
+.time-location {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: #7f8fa6;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* --- ANIMAÇÕES CSS --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+.fade-in-delay {
+  animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

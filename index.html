@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda Cultural - Festival TechArt</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1 class="fade-in">Festival TechArt 2024</h1>
+      <p class="fade-in-delay">
+        Sua agenda diária de workshops, shows e exposições.
+      </p>
+    </header>
+
+    <main class="events-container">
+      <section class="control-panel">
+        <div class="filter-box">
+          <label for="filter">Filtrar por Categoria:</label>
+          <select id="filter" class="filter-select">
+            <option value="todos">Todos os Eventos</option>
+            <option value="show">Shows</option>
+            <option value="workshop">Workshops</option>
+            <option value="exposicao">Exposições</option>
+          </select>
+        </div>
+
+        <form id="add-event-form" class="add-event-form">
+          <h3>Adicionar Novo Evento</h3>
+          <input
+            type="text"
+            id="event-titulo"
+            placeholder="Título do Evento"
+            required
+          />
+          <textarea id="event-descricao" placeholder="Descrição"></textarea>
+          <select id="event-categoria" required>
+            <option value="" disabled selected>Categoria</option>
+            <option value="show">Show</option>
+            <option value="workshop">Workshop</option>
+            <option value="exposicao">Exposição</option>
+          </select>
+          <input
+            type="text"
+            id="event-data"
+            placeholder="Data (Ex: 12/Dez)"
+            required
+          />
+          <input
+            type="text"
+            id="event-hora"
+            placeholder="Hora (Ex: 10:00)"
+            required
+          />
+          <input type="text" id="event-local" placeholder="Local" required />
+          <input
+            type="text"
+            id="event-palestrante"
+            placeholder="Palestrante/Artista"
+          />
+          <button type="submit" class="add-button">Adicionar</button>
+        </form>
+
+        <div class="pie-chart-container">
+          <h3>Distribuição de Eventos</h3>
+          <div
+            id="pie-chart"
+            class="pie-chart"
+            role="img"
+            aria-label="Gráfico de distribuição de eventos"
+          ></div>
+          <div id="chart-legend" class="chart-legend"></div>
+        </div>
+      </section>
+
+      <ul id="events-list" class="events-list"></ul>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
